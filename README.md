@@ -36,7 +36,7 @@ var Model = mongoose.model('Model',  schema); // Model.paginate()
 
 * `[query]` {Object} - Query criteria. [Documentation](https://docs.mongodb.org/manual/tutorial/query-documents)
 * `[options]` {Object}
-  - `[aggregate]` {Boolean} - If `true` the `query` can be a aggregate object). [Documentation](https://mongoosejs.com/docs/api/aggregate.html#aggregate_Aggregate)
+  - `[aggregate]` {Boolean} - If `true`, the `query` can be a aggregate object). [Documentation](https://mongoosejs.com/docs/api/aggregate.html#aggregate_Aggregate)
   - `[select]` {Object | String} - Fields to return (by default returns all fields). [Documentation](http://mongoosejs.com/docs/api.html#query_Query-select)
   - `[sort]` {Object | String} - Sort order. [Documentation](http://mongoosejs.com/docs/api.html#query_Query-sort)
   - `[populate]` {Array | Object | String} - Paths which should be populated with other documents. [Documentation](http://mongoosejs.com/docs/api.html#query_Query-populate)
