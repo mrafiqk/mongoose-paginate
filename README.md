@@ -1,5 +1,5 @@
 
-# mongoose-paginate
+# will-paginate
 
 > Pagination plugin for [Mongoose](http://mongoosejs.com)
 
@@ -13,7 +13,7 @@
 ## Installation
 
 ```sh
-npm install mongoose-paginate
+npm install will-paginate
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ Add plugin to a schema and then use model `paginate` method:
 
 ```js
 var mongoose = require('mongoose');
-var mongoosePaginate = require('mongoose-paginate');
+var mongoosePaginate = require('will-paginate');
 
 var schema = new mongoose.Schema({ /* schema definition */ });
 schema.plugin(mongoosePaginate);
@@ -126,7 +126,7 @@ Model.paginate({}, { offset: 100, limit: 0 }).then(function(result) {
 config.js:
 
 ```js
-var mongoosePaginate = require('mongoose-paginate');
+var mongoosePaginate = require('will-paginate');
 
 mongoosePaginate.paginate.options = {
   lean:  true,
