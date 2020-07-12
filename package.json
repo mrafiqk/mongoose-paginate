@@ -1,7 +1,7 @@
 {
   "name": "will-paginate",
   "description": "Pagination plugin for Mongoose",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "mrafiqk",
     "email": "mohammedrafiq.p@gmail.com"
