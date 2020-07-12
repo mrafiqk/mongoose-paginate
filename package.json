@@ -1,10 +1,10 @@
 {
-  "name": "mongoose-paginate",
+  "name": "will-paginate",
   "description": "Pagination plugin for Mongoose",
-  "version": "5.0.2",
+  "version": "1.0.0",
   "author": {
-    "name": "Edward Hotchkiss",
-    "email": "edward@edwardhotchkiss.com"
+    "name": "mrafiqk",
+    "email": "mohammedrafiq.p@gmail.com"
   },
   "contributors": [
     {
@@ -18,6 +18,10 @@
     {
       "name": "Dmitry Kirilyuk",
       "email": "gk.joker@gmail.com"
+    },
+    {
+      "name": "Mohamed Rafiq",
+      "email": "mohammedrafiq.p@gmail.com"
     }
   ],
   "repository": {

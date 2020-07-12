@@ -36,8 +36,9 @@ var Model = mongoose.model('Model',  schema); // Model.paginate()
 
 * `[query]` {Object} - Query criteria. [Documentation](https://docs.mongodb.org/manual/tutorial/query-documents)
 * `[options]` {Object}
-  - `[select]` {Object | String} - Fields to return (by default returns all fields). [Documentation](http://mongoosejs.com/docs/api.html#query_Query-select) 
-  - `[sort]` {Object | String} - Sort order. [Documentation](http://mongoosejs.com/docs/api.html#query_Query-sort) 
+  - `[aggregate]` {Boolean} - If `true` the `query` can be a aggregate object). [Documentation](https://mongoosejs.com/docs/api/aggregate.html#aggregate_Aggregate)
+  - `[select]` {Object | String} - Fields to return (by default returns all fields). [Documentation](http://mongoosejs.com/docs/api.html#query_Query-select)
+  - `[sort]` {Object | String} - Sort order. [Documentation](http://mongoosejs.com/docs/api.html#query_Query-sort)
   - `[populate]` {Array | Object | String} - Paths which should be populated with other documents. [Documentation](http://mongoosejs.com/docs/api.html#query_Query-populate)
   - `[lean=false]` {Boolean} - Should return plain javascript objects instead of Mongoose documents?  [Documentation](http://mongoosejs.com/docs/api.html#query_Query-lean)
   - `[leanWithId=true]` {Boolean} - If `lean` and `leanWithId` are `true`, adds `id` field with string representation of `_id` to every document
@@ -52,8 +53,8 @@ Promise fulfilled with object having properties:
 * `docs` {Array} - Array of documents
 * `total` {Number} - Total number of documents in collection that match a query
 * `limit` {Number} - Limit that was used
-* `[page]` {Number} - Only if specified or default `page`/`offset` values were used 
-* `[pages]` {Number} - Only if `page` specified or default `page`/`offset` values were used 
+* `[page]` {Number} - Only if specified or default `page`/`offset` values were used
+* `[pages]` {Number} - Only if `page` specified or default `page`/`offset` values were used
 * `[offset]` {Number} - Only if specified or default `page`/`offset` values were used
 
 ### Examples
@@ -98,7 +99,7 @@ var options = {
   sort: { date: -1 },
   populate: 'author',
   lean: true,
-  offset: 20, 
+  offset: 20,
   limit: 10
 };
 
@@ -127,7 +128,7 @@ config.js:
 ```js
 var mongoosePaginate = require('mongoose-paginate');
 
-mongoosePaginate.paginate.options = { 
+mongoosePaginate.paginate.options = {
   lean:  true,
   limit: 20
 };
