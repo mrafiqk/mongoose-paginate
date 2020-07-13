@@ -1,43 +1,10 @@
 {
   "name": "will-paginate",
-  "description": "Pagination plugin for Mongoose",
   "version": "1.0.2",
-  "author": {
-    "name": "mrafiqk",
-    "email": "mohammedrafiq.p@gmail.com"
-  },
-  "contributors": [
-    {
-      "name": "Edward Hotchkiss",
-      "email": "edward@edwardhotchkiss.com"
-    },
-    {
-      "name": "Nick Baugh",
-      "email": "niftylettuce@gmail.com"
-    },
-    {
-      "name": "Dmitry Kirilyuk",
-      "email": "gk.joker@gmail.com"
-    },
-    {
-      "name": "Mohamed Rafiq",
-      "email": "mohammedrafiq.p@gmail.com"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mrafiqk/mongoose-paginate.git"
-  },
-  "license": "MIT",
-  "keywords": [
-    "mongoose",
-    "paginate",
-    "pagination",
-    "paging",
-    "page"
-  ],
-  "engines": {
-    "node": ">=4.2.4"
+  "description": "Pagination plugin for Mongoose",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
   },
   "dependencies": {},
   "devDependencies": {
@@ -46,6 +13,23 @@
     "chai": "3.4.1"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha tests/*.js -R spec --ui bdd --timeout 5000"
-  }
+    "test": "mocha tests/*.js -R spec --ui bdd --timeout 5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrafiqk/mongoose-paginate.git"
+  },
+  "keywords": [
+    "mongoose",
+    "paginate",
+    "pagination",
+    "paging",
+    "page"
+  ],
+  "author": "mrafiqk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrafiqk/mongoose-paginate/issues"
+  },
+  "homepage": "https://github.com/mrafiqk/mongoose-paginate#readme"
 }
