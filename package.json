@@ -27,7 +27,7 @@
     "page"
   ],
   "author": "mrafiqk",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mrafiqk/mongoose-paginate/issues"
   },
