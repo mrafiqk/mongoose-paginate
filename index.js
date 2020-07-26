@@ -81,9 +81,10 @@ function paginate(query, options, callback) {
 
     return Promise.props(promises)
         .then(function(data) {
+            var count = Array.isArray(data.count) ? (data.count[0] || { count: 0 }) :  data;
             var result = {
                 docs:  data.docs,
-                total: Array.isArray(data.count) ? data.count[0].count : data.count,
+                total: count.count,
                 limit: limit
             };
 
