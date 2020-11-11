@@ -93,8 +93,8 @@ function paginate(query, options, callback) {
             }
 
             if (page !== undefined) {
-                result.page  = page;
-                result.pages = Math.ceil(result.total / limit) || 1;
+                result.page  = parseInt(page || 1);
+                result.pages = parseInt(Math.ceil(result.total / limit) || 1);
             }
 
             return result;
