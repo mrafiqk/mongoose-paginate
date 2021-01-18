@@ -41,31 +41,35 @@ function paginate(query, options, callback) {
 
     var promises = {
         docs:  Promise.resolve([]),
-        count: options.aggregate === true ? this.aggregate(query).count('count') : this.count(query).exec()
     };
+    if(options.aggregate === true) {
+      let hasNextQuery = JSON.parse(JSON.stringify(query));
+      hasNextQuery.splice(1, 0, {$limit: (limit + 1)});
+      hasNextQuery.splice(1, 0, {$skip: skip});
+      promises.hasNext = this.aggregate(hasNextQuery).exec();
+    } else {
+      promises.count = this.count(query).exec();
+    }
 
     if (limit) {
       var query;
       if (options.aggregate === true) {
+        query.splice(1, 0, {$limit: limit});
+        query.splice(1, 0, {$skip: skip});
         query = this.aggregate(query)
       } else {
         query = this.find(query).select(select).lean(lean);
+        if (sort) {
+          query = query.sort(sort)
+        }
+        query = query.skip(skip).limit(limit)
       }
-
-      if (sort) {
-        query = query.sort(sort)
-      }
-      query = query
-              .skip(skip)
-              .limit(limit)
-
 
         if (populate) {
             [].concat(populate).forEach(function(item) {
                 query.populate(item);
             });
         }
-
         promises.docs = query.exec();
 
         if (lean && leanWithId) {
@@ -92,9 +96,14 @@ function paginate(query, options, callback) {
                 result.offset = offset;
             }
 
+            if (data.hasNext) {
+              result.hasNext = data.hasNext.length > limit ? true : false;
+            }
+
             if (page !== undefined) {
                 result.page  = parseInt(page || 1);
-                result.pages = parseInt(Math.ceil(result.total / limit) || 1);
+                if(result.total)
+                  result.pages = parseInt(Math.ceil(result.total / limit) || 1);
             }
 
             return result;
