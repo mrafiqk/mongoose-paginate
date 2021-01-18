@@ -17,6 +17,7 @@ var Promise = require('bluebird');
  */
 function paginate(query, options, callback) {
     query   = query || {};
+
     options = Object.assign({}, paginate.options, options);
 
     var select     = options.select;
@@ -42,10 +43,18 @@ function paginate(query, options, callback) {
     var promises = {
         docs:  Promise.resolve([]),
     };
+    let idx = 1;
     if(options.aggregate === true) {
+      for(let i in query) {
+        if(query[i]['$match']) {
+          idx = i+1;
+          break;
+        }
+      }
+
       let hasNextQuery = JSON.parse(JSON.stringify(query));
-      hasNextQuery.splice(1, 0, {$limit: (limit + 1)});
-      hasNextQuery.splice(1, 0, {$skip: skip});
+      hasNextQuery.splice(idx, 0, {$limit: (limit + 1)});
+      hasNextQuery.splice(idx, 0, {$skip: skip});
       promises.hasNext = this.aggregate(hasNextQuery).exec();
     } else {
       promises.count = this.count(query).exec();
@@ -54,8 +63,8 @@ function paginate(query, options, callback) {
     if (limit) {
       var query;
       if (options.aggregate === true) {
-        query.splice(1, 0, {$limit: limit});
-        query.splice(1, 0, {$skip: skip});
+        query.splice(idx, 0, {$limit: limit});
+        query.splice(idx, 0, {$skip: skip});
         query = this.aggregate(query)
       } else {
         query = this.find(query).select(select).lean(lean);
