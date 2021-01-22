@@ -1,6 +1,6 @@
 {
   "name": "will-paginate",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Pagination plugin for Mongoose",
   "main": "index.js",
   "directories": {

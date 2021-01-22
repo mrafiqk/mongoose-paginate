@@ -53,8 +53,8 @@ function paginate(query, options, callback) {
       }
 
       let hasNextQuery = JSON.parse(JSON.stringify(query));
-      hasNextQuery.splice(idx, 0, {$limit: (limit + 1)});
       hasNextQuery.splice(idx, 0, {$skip: skip});
+      hasNextQuery.splice(idx, 0, {$limit: (limit + 1)});
       promises.hasNext = this.aggregate(hasNextQuery).exec();
     } else {
       promises.count = this.count(query).exec();
@@ -63,8 +63,8 @@ function paginate(query, options, callback) {
     if (limit) {
       var query;
       if (options.aggregate === true) {
-        query.splice(idx, 0, {$limit: limit});
         query.splice(idx, 0, {$skip: skip});
+        query.splice(idx, 0, {$limit: limit});
         query = this.aggregate(query)
       } else {
         query = this.find(query).select(select).lean(lean);
