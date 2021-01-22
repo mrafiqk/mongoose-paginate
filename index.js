@@ -28,10 +28,10 @@ function paginate(query, options, callback) {
 
     var limit = options.hasOwnProperty('limit') ? options.limit : 10;
     var skip, offset, page;
-    if (options.hasOwnProperty('offset')) {
+    if (options.hasOwnProperty('offset') && options.offset) {
         offset = options.offset;
         skip   = offset;
-    } else if (options.hasOwnProperty('page')) {
+    } else if (options.hasOwnProperty('page') && options.page) {
         page = options.page;
         skip = (page - 1) * limit;
     } else {
