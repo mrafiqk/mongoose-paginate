@@ -45,16 +45,20 @@ function paginate(query, options, callback) {
     };
     let idx = 1;
     if(options.aggregate === true) {
+      let pagingQuery = []
+      let flag = true;
       for(let i in query) {
-        if(query[i]['$match']) {
-          idx = i+1;
-          break;
+        pagingQuery.push(query[i]);
+        if(query[i]['$match'] && flag) {
+          pagingQuery = pagingQuery.concat([{$skip: skip}, {$limit: (limit)}])
+          idx = parseInt(i) + 2;
+          flag = false;
         }
       }
+      query = pagingQuery;
 
-      let hasNextQuery = JSON.parse(JSON.stringify(query));
-      hasNextQuery.splice(idx, 0, {$skip: skip});
-      hasNextQuery.splice(idx, 0, {$limit: (limit + 1)});
+      let hasNextQuery = JSON.parse(JSON.stringify(pagingQuery));
+      hasNextQuery[idx]['$limit'] += 1
       promises.hasNext = this.aggregate(hasNextQuery).exec();
     } else {
       promises.count = this.count(query).exec();
@@ -63,8 +67,6 @@ function paginate(query, options, callback) {
     if (limit) {
       var query;
       if (options.aggregate === true) {
-        query.splice(idx, 0, {$skip: skip});
-        query.splice(idx, 0, {$limit: limit});
         query = this.aggregate(query)
       } else {
         query = this.find(query).select(select).lean(lean);
