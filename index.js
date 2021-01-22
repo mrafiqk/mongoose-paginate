@@ -46,19 +46,19 @@ function paginate(query, options, callback) {
     let idx = 1;
     if(options.aggregate === true) {
       let pagingQuery = []
+      let hasNextQuery = []
       let flag = true;
       for(let i in query) {
         pagingQuery.push(query[i]);
+        hasNextQuery.push(query[i]);
         if(query[i]['$match'] && flag) {
-          pagingQuery = pagingQuery.concat([{$skip: skip}, {$limit: (limit)}])
+          pagingQuery = pagingQuery.concat([{$skip: skip}, {$limit: (limit)}]);
+          hasNextQuery = hasNextQuery.concat([{$skip: skip}, {$limit: (limit + 1)}]);
           idx = parseInt(i) + 2;
           flag = false;
         }
       }
       query = pagingQuery;
-
-      let hasNextQuery = JSON.parse(JSON.stringify(pagingQuery));
-      hasNextQuery[idx]['$limit'] += 1
       promises.hasNext = this.aggregate(hasNextQuery).exec();
     } else {
       promises.count = this.count(query).exec();
