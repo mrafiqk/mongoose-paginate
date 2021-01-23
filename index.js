@@ -52,8 +52,8 @@ function paginate(query, options, callback) {
         pagingQuery.push(query[i]);
         hasNextQuery.push(query[i]);
         if(query[i]['$match'] && flag) {
-          pagingQuery = pagingQuery.concat([{$skip: skip}, {$limit: (limit)}]);
-          hasNextQuery = hasNextQuery.concat([{$skip: skip}, {$limit: (limit + 1)}]);
+          pagingQuery = pagingQuery.concat([(sort ? { $sort: sort } : null), {$skip: skip}, {$limit: (limit)}].filter((el) => { return el != null }));
+          hasNextQuery = hasNextQuery.concat([(sort ? { $sort: sort } : null), {$skip: skip}, {$limit: (limit + 1)}].filter((el) => { return el != null }));
           idx = parseInt(i) + 2;
           flag = false;
         }
